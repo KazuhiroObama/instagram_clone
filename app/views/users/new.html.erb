@@ -1,0 +1,54 @@
+<%= form_with(model: @user, local: true, class: "form_field") do |form| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "点") %> 入力内容に間違いがあります。</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="container-fluid">
+  	<div class="row">
+      <div class="col-xs-0 col-md-0 col-lg-2"></div>
+  		<div class="col-xs-o col-md-0 col-lg-4 smartphone_field">
+        <%= image_tag("smartphone.png", class: :smartphon) %>
+      </div>
+  		<div class="col-xs-12 col-md-12 col-lg-4">
+        <div class="user_new_form">
+          <p class="form-title">
+            Instagram clone
+          </p>
+          <p class="form-comment">
+            友達の写真や動画をチェックしよう
+          </p>
+          <div class="form-specration">
+            または
+          </div>
+            <div class="input_flame">
+              <%= form.text_field :name, :placeholder => "名前", class: :input_form %>
+            </div>
+            <div class="input_flame">
+              <%= form.email_field :email, class: :'email_field', :placeholder => "メールアドレス", class: :input_form %>
+            </div>
+            <div class="input_flame">
+              <%= form.password_field :password, :placeholder => "パスワード", class: :input_form  %>
+            </div>
+            <div class="input_flame">
+              <%= form.password_field :password_confirmation, :placeholder => "パスワード確認", class: :input_form  %>
+            </div>
+            <div class="input_flame">
+              <%= form.submit "新規登録する", class: :submit_form %>
+            </div>
+          <% end %>
+        </div>
+        <div class="user_new_field">
+          <p class="user_new_field_font">アカウントをお持ちですか？<%= link_to 'ログイン', new_session_path %></p>
+        </div>
+      </div>
+  		<div class="col-xs-0 col-md-0 col-lg-2"></div>
+  	</div>
+  </div>

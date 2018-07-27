@@ -1,0 +1,31 @@
+<% flash.each do |key, value| %>
+  <%= content_tag(:div, value, class: "alert #{key}") %>
+<% end %>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-0 col-md-0 col-lg-4"></div>
+    <div class="col-xs-12 col-md-12 col-lg-4">
+      <div class="user_new_form">
+        <p class="form-title">
+          Instagram clone
+        </p>
+        <%= form_with(scope: :session, url: sessions_path, local: true) do |form| %>
+          <div class="input_flame">
+            <%= form.email_field :email, class: :'email_field', :placeholder => "メールアドレス", class: :input_form %>
+          </div>
+          <div class="input_flame">
+            <%= form.password_field :password, :placeholder => "パスワード", class: :input_form  %>
+          </div>
+          <div class="input_flame">
+            <%= form.submit "ログイン", class: :submit_form %>
+          </div>
+        <% end %>
+      </div>
+      <div class="user_new_field">
+        <p class="user_new_field_font">アカウントをお持ち出ないですか？<%= link_to '新規登録', new_user_path %></p>
+      </div>
+    </div>
+    <div class="col-xs-0 col-md-0 col-lg-4"></div>
+  </div>
+</div>

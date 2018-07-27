@@ -1,0 +1,5 @@
+<%= render 'header' %>
+
+<% @picture.each do |picture| %>
+  <%= image_tag picture.image, class: :picture_image %>
+<% end %>

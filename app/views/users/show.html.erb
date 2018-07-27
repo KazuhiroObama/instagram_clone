@@ -1,0 +1,64 @@
+<%= render 'header' %>
+
+<% flash.each do |key, value| %>
+  <%= content_tag(:div, value, class: "alert #{key}") %>
+<% end %>
+
+<div class="container-fluid">
+  <div class="row user-show-upper">
+    <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2"></div>
+    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+      <% if @icon.present? %>
+        <%= form_with(model: @icon, local: true) do |f| %>
+          <%= image_tag @icon.thumbnail, class: :thumbnail %>
+          <% if @user.id == current_user.id %>
+            <%= f.file_field :thumbnail %>
+            <%= f.file_field :user_id, value: :"#{@user.id}", type: :hidden %>
+            <%= f.submit "アイコン変更", class: "btn btn-primary" %>
+            <%= link_to "アイコン削除", icon_path(@icon.id), method: :delete, data: { confirm: '本当によろしいですか？' } %>
+          <% end %>
+        <% end %>
+      <% else %>
+        <%= form_with(model: Icon.new, local: true) do |f| %>
+          <%= image_tag "generic-profile-avatar_352864.jpg", class: :thumbnail %>
+          <% if @user.id == current_user.id %>
+            <%= f.file_field :thumbnail %>
+            <%= f.file_field :user_id, value: :"#{@user.id}", type: :hidden %>
+            <%= f.submit "アイコン作成", class: "btn btn-primary" %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+      <h1>
+        <%= @user.name %></br>
+      </h1>
+      <p>
+        投稿<%= @user.pictures.length %>件 |
+        お気に入り<%= @user.favorites.length %>件
+      </p>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 edit-profile-button-space">
+      <% if @user.id == current_user.id %>
+        <%= link_to 'プロフィールを編集', edit_user_path(@user), class: "btn btn-default edit-profile-button", role: "button" %>
+      <% end %>
+    </div>
+    <div class="col-xs-0 col-md-2 col-lg-2"></div>
+  </div>
+  <div class="row">
+    <div class="col-xs-0 col-md-2 col-lg-2"></div>
+    <div class="col-xs-12 col-md-8 col-lg-8">
+      <% @pictures.each do |picture| %>
+        <div class="picture_field">
+          <%= image_tag picture.image, class: :picture_image %>
+          <%= link_to picture do %>
+            <div class="mask">
+              <div class="caption">詳しく見る</div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-xs-0 col-md-2 col-lg-2"></div>
+  </div>
+</div>

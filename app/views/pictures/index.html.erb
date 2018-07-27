@@ -1,0 +1,14 @@
+<%= render 'header' %>
+
+<h1>みんなの写真一覧</h1>
+
+<% @pictures.each do |picture| %>
+  <div class="picture_field">
+    <%= image_tag picture.image, class: :picture_image %>
+    <%= link_to picture do %>
+      <div class="mask">
+        <div class="caption">詳しく見る</div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

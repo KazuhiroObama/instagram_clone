@@ -1,0 +1,9 @@
+<%= render 'header' %>
+
+<% flash.each do |key, value| %>
+  <%= content_tag(:div, value, class: "alert #{key}") %>
+<% end %>
+
+<h1>写真投稿画面</h1>
+
+<%= render 'form', picture: @picture, comment: @comment, picture_submit_name: "写真を投稿する" %>

@@ -1,0 +1,47 @@
+<%= form_with(model: picture, local: true) do |form| %>
+  <% if picture.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(picture.errors.count, "点") %> 入力内容に間違いがあります。</h2>
+
+      <ul>
+      <% picture.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    </br>
+    </br>
+    <% if picture.image.present? %>
+      <%= image_tag picture.image, class: :picture_image %>
+    <% else %>
+      <%= image_tag "camera-icon_8.png", class: :picture_image %></br>
+      <%= form.label :image, "画像を選択して下さい" %>
+    <% end %>
+    <%= form.file_field :image, id: :picture_image %>
+  </div>
+
+  </br>
+  </br>
+  <%= form.fields_for :comments do |comment| %>
+    <%= comment.label :content, "コメント入力欄" %></br>
+    <%= comment.text_area :content, row: 4, cols: 30 %></br>
+  <% end %>
+
+  </br>
+  </br>
+  <div class="actions">
+    <%= form.submit picture_submit_name, class: "btn btn-success"%>
+  </div>
+
+  </br>
+  </br>
+  </br>
+  </br>
+
+  <% if picture.image.present? %>
+    <%= link_to "投稿写真削除", picture_path(picture.id), method: :delete, data: { confirm: '本当によろしいですか？' }, class: "btn btn-danger" %>
+  <% end %>
+<% end %>

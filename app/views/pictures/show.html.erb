@@ -1,0 +1,17 @@
+<%= render 'header' %>
+
+<% flash.each do |key, value| %>
+  <%= content_tag(:div, value, class: "alert #{key}") %>
+<% end %>
+
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @picture.image, class: :picture_image %>
+</p>
+
+<% if @picture.comments.first.present? %>
+  <%= @picture.comments.first.content %>
+<% end %>
+
+<%= link_to 'Edit', edit_picture_path(@picture) %> |
+<%= link_to 'Back', pictures_path %>
