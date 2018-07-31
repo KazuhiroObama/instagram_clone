@@ -17,19 +17,17 @@
   </div>
 <% end %>
 
-<% if @icon.present? %>
-  <%= form_with(model: @icon, local: true) do |f| %>
-    <%= image_tag @icon.thumbnail, class: :thumbnail %>
-    <%= f.file_field :thumbnail %>
-    <%= f.file_field :user_id, value: :"#{@user.id}", type: :hidden %>
+<% if @user.icon.present? %>
+  <%= form_with(model: @user, local: true) do |f| %>
+    <%= image_tag @user.icon, class: :icon %>
+    <%= f.file_field :icon %>
     <%= f.submit "アイコン変更", class: "btn btn-primary" %>
-    <%= link_to "アイコン削除", icon_path(@icon.id), method: :delete, data: { confirm: '本当によろしいですか？' } %>
+    <%= link_to "アイコン削除", user_path(@user, user: {remove_icon: 1}), method: :patch, data: { confirm: '本当によろしいですか？' } %>
   <% end %>
 <% else %>
-  <%= form_with(model: Icon.new, local: true) do |f| %>
-    <%= image_tag "generic-profile-avatar_352864.jpg", class: :thumbnail %>
-    <%= f.file_field :thumbnail %>
-    <%= f.file_field :user_id, value: :"#{@user.id}", type: :hidden %>
+  <%= form_with(model: @user, local: true) do |f| %>
+    <%= image_tag "generic-profile-avatar_352864.jpg", class: :icon %>
+    <%= f.file_field :icon %>
     <%= f.submit "アイコン作成", class: "btn btn-primary" %>
   <% end %>
 <% end %>
@@ -52,6 +50,11 @@
   <div class="field">
     <%= form.label :password %>
     <%= form.password_field :password, id: :user_password %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password_confirmation %>
+    <%= form.password_field :password_confirmation, id: :password_confirmation %>
   </div>
 
   <div class="actions">

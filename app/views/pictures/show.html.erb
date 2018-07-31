@@ -4,14 +4,63 @@
   <%= content_tag(:div, value, class: "alert #{key}") %>
 <% end %>
 
-<p>
-  <strong>Image:</strong>
-  <%= image_tag @picture.image, class: :picture_image %>
-</p>
+<h3>写真詳細画面</h3>
+<%= image_tag @picture.image, class: :picture_image %>
+</br>
+</br>
 
-<% if @picture.comments.first.present? %>
-  <%= @picture.comments.first.content %>
+<% if @picture.user_id != current_user.id %>
+  <% if @favorite.present? %>
+    <%= link_to 'お気に入り解除する', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-warning' %>
+  <% else %>
+    <%= link_to 'お気に入りする', favorites_path(picture_id: @picture.id), method: :post, class: 'btn btn-primary' %>
+  <% end %>
+<% else %>
+  <%= link_to "投稿写真削除", picture_path(id: @picture.id), method: :delete, class: 'btn btn-danger', class: 'btn btn-danger', data: { confirm: '本当に写真を削除してもよろしいですか？' } %>
 <% end %>
 
-<%= link_to 'Edit', edit_picture_path(@picture) %> |
-<%= link_to 'Back', pictures_path %>
+
+
+</br>
+</br>
+</br>
+
+<h4>コメント</h4>
+  <div>
+    <% @picture.comments.each do |comment| %>
+      <% if comment.content.present? %>
+        <div class="icon_picture_field">
+          <%= image_tag comment.picture.user.icon, class: "comment_icon" %>
+          <%= link_to comment.picture.user do %>
+            <div class="mask">
+              <div class="caption">投稿者</div>
+            </div>
+          <% end %>
+        </div>
+        <%= comment.content %>
+        </br>
+      <% end %>
+    <% end %>
+  </div>
+
+
+<% if @picture.comments.find_by(user_id: current_user.id).present? %>
+  <h3>コメント編集</h3>
+<% else %>
+  <h3>コメント投稿</h3>
+<% end %>
+
+<%= form_with(model: @comment, local: true) do |form| %>
+  <%= form.text_area :content, row: 4, cols: 30 %>
+  <%= form.text_field :user_id, value: :"#{current_user.id}", type: :hidden %>
+  <%= form.text_field :picture_id, value: :"#{@picture.id}", type: :hidden %>
+  </br>
+  <% if @picture.comments.find_by(user_id: current_user.id).present? %>
+    <div class="actions">
+      <%= form.submit "コメント編集", class: "btn btn-success"%>
+      <%= link_to "コメント削除", comment_path(id: @comment.id, comment: { picture_id: @picture.id }), method: :delete, class: 'btn btn-danger', data: { confirm: 'コメントを削除してよろしいですか？' } %>
+    </div>
+  <% else %>
+      <%= form.submit "コメント投稿", class: "btn btn-success"%>
+  <% end %>
+<% end %>

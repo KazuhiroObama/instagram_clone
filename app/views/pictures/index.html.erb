@@ -3,12 +3,24 @@
 <h1>みんなの写真一覧</h1>
 
 <% @pictures.each do |picture| %>
-  <div class="picture_field">
-    <%= image_tag picture.image, class: :picture_image %>
-    <%= link_to picture do %>
-      <div class="mask">
-        <div class="caption">詳しく見る</div>
-      </div>
-    <% end %>
+  <div class="inline_block">
+    <div class="picture_field">
+      <%= image_tag picture.image, class: :picture_image %>
+      <%= link_to picture do %>
+        <div class="mask">
+          <div class="caption">詳しく見る</div>
+        </div>
+      <% end %>
+    </div>
+    </br>
+    投稿者
+    <div class="icon_picture_field">
+      <%= image_tag picture.user.icon, class: "comment_icon" %>
+      <%= link_to picture.user do %>
+        <div class="mask">
+          <div class="caption">投稿者</div>
+        </div>
+      <% end %>
+    </div>
   </div>
 <% end %>

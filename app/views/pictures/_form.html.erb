@@ -26,8 +26,16 @@
   </br>
   </br>
   <%= form.fields_for :comments do |comment| %>
-    <%= comment.label :content, "コメント入力欄" %></br>
+
+    <%= comment.label :content, "コメント" %></br>
     <%= comment.text_area :content, row: 4, cols: 30 %></br>
+
+    <%= comment.label '削除' %>
+    <%= comment.check_box :_destroy %>
+
+    <%= comment.text_field :user_id, value: :"#{current_user.id}", type: :hidden %>
+    </br>
+    </br>
   <% end %>
 
   </br>

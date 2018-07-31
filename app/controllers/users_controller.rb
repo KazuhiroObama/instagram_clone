@@ -1,13 +1,12 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+  before_action :ensure_correct_user, only: [:create, :update, :destroy]
 
   def index
     @users = User.all
   end
 
   def show
-    @icon = @user.icon
     @pictures = @user.pictures
     @favorite = @user.favorites
   end
@@ -17,7 +16,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @icon = @user.icon
   end
 
   def create
@@ -34,12 +32,17 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
-      flash["alert-info"] = 'プロフィールを変更しました'
-      redirect_to @user
+    if params[:user].nil?
+      flash["alert-danger"] = 'プロフィール画像を選択して下さい'
+      redirect_back(fallback_location: root_path)
     else
-      flash["alert-danger"] = 'プロフィールを変更失敗しました'
-      redirect_to edit_user_path(@user.id)
+      if @user.update(user_params)
+        flash["alert-info"] = 'プロフィールを変更しました'
+        redirect_back(fallback_location: root_path)
+      else
+        flash["alert-danger"] = 'プロフィールを変更失敗しました'
+        redirect_back(fallback_location: root_path)
+      end
     end
   end
 
@@ -59,6 +62,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_digest)
+      params.require(:user).permit(:name, :email, :password, :password_digest, :icon, :remove_icon)
     end
 end

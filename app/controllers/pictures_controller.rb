@@ -1,12 +1,20 @@
 class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+  before_action :ensure_correct_user, only: [:create, :update, :destroy]
+
   def index
     @pictures = Picture.all
-    @favorite = current_user.favorites
   end
 
   def show
+    @favorite = current_user.favorites.find_by(picture_id: @picture.id)
+    comment = @picture.comments.find_by(user_id: current_user.id)
+    if comment.present?
+      @comment = comment
+    else
+      @comment = Comment.new
+    end
+
   end
 
   def new
@@ -15,7 +23,6 @@ class PicturesController < ApplicationController
   end
 
   def edit
-    @comment = @picture.comments.last
   end
 
   def create
@@ -32,7 +39,7 @@ class PicturesController < ApplicationController
   end
 
   def update
-    if @picture.update_attributes(picture_params)
+    if @picture.update(picture_params)
       flash["alert-success"] = '写真を更新しました'
       redirect_to @picture
     else
@@ -52,16 +59,16 @@ class PicturesController < ApplicationController
   end
 
   def favorite
-    @picture = current_user.favorite_pictures
+    @pictures = current_user.favorite_pictures
   end
 
   private
     def set_picture
       @picture = Picture.find(params[:id])
-      @user = @picture.user
+      @user = @picture.user # ensure_correct_userメソッド用
     end
 
     def picture_params
-      params.require(:picture).permit(:image, {comments_attributes: [:content]})
+      params.require(:picture).permit(:image, {comments_attributes: [:content, :id, :_destroy, :user_id]})
     end
 end
