@@ -1,5 +1,5 @@
 class PicturesController < ApplicationController
-  before_action :set_picture, only: [:show, :edit, :update, :destroy]
+  before_action :set_picture, only: [:show, :create, :edit, :update, :destroy]
   before_action :ensure_correct_user, only: [:create, :update, :destroy]
 
   def index
