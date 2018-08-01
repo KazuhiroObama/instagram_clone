@@ -89,6 +89,9 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  # 投稿確認メールに画像を表示させる設定
+  config.action_controller.asset_host = 'https://sheltered-springs-61172.herokuapp.com/'
+  config.action_mailer.asset_host = config.action_controller.asset_host
   config.action_mailer.default_url_options = { host: 'sheltered-springs-61172.herokuapp.com' }
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
@@ -100,7 +103,4 @@ Rails.application.configure do
     authentication: :plain,
     enable_starttls_auto: true
   }
-  # 投稿確認メールに画像を表示させる設定
-  config.action_controller.asset_host = 'https://sheltered-springs-61172.herokuapp.com'
-  config.action_mailer.asset_host = config.action_controller.asset_host
 end
