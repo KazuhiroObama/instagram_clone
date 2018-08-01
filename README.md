@@ -52,5 +52,5 @@ $ rails server
 ```
 
 ## Author
-[@now_cold](https://github.com/KazuhiroObama)
+[KazuhiroObama](https://github.com/KazuhiroObama)
 
