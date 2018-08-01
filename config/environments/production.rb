@@ -66,7 +66,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "instagram_clone_#{Rails.env}"
   config.action_mailer.perform_caching = false
 
-  config.action_controller.asset_host = 'http://yourhostname.com'
+  config.action_controller.asset_host = 'https://gentle-lake-78251.herokuapp.com'
   config.action_mailer.asset_host = config.action_controller.asset_host
 
   # Ignore bad email addresses and do not raise email delivery errors.
@@ -97,7 +97,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # メール送信用
-  config.action_controller.asset_host = 'https://git.heroku.com/gentle-lake-78251.git'
+  config.action_controller.asset_host = 'https://gentle-lake-78251.herokuapp.com'
   config.action_mailer.asset_host = config.action_controller.asset_host
 
   config.action_mailer.default_url_options = { host: 'gentle-lake-78251.herokuapp.com' }
