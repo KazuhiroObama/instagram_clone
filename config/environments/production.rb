@@ -63,7 +63,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # 投稿確認メールに画像を表示させる設定
-  config.action_controller.asset_host = 'https://sheltered-springs-61172.herokuapp.com/'
+  config.action_controller.asset_host = 'https://sheltered-springs-61172.herokuapp.com'
   config.action_mailer.asset_host = config.action_controller.asset_host
   config.action_mailer.default_url_options = { host: 'sheltered-springs-61172.herokuapp.com' }
 
