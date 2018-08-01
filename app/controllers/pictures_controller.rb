@@ -1,6 +1,6 @@
 class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
-  before_action :picture_correct_user, only: [:create, :update, :destroy]
+  before_action :picture_correct_user, only: [ :update, :destroy]
 
   def index
     @pictures = Picture.all
