@@ -1,6 +1,6 @@
 class PicturesController < ApplicationController
-  before_action :set_picture, only: [:show, :create, :edit, :update, :destroy]
-  before_action :ensure_correct_user, only: [:create, :update, :destroy]
+  before_action :set_picture, only: [:show, :edit, :update, :destroy]
+  before_action :picture_correct_user, only: [:create, :update, :destroy]
 
   def index
     @pictures = Picture.all
@@ -65,7 +65,6 @@ class PicturesController < ApplicationController
   private
     def set_picture
       @picture = Picture.find(params[:id])
-      @user = @picture.user # ensure_correct_userメソッド用
     end
 
     def picture_params
