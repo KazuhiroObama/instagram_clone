@@ -12,8 +12,8 @@ module ApplicationHelper
     end
   end
   def icon_correct_user
-    if comment_params[:user_id] != current_user
-      flash["alert-danger"] = "どうして他のフリしてコメントするの？"
+    if comment_params[:user_id] != current_user.id
+      flash["alert-danger"] = "どうして他人のフリしてコメントするの？"
       redirect_to @picture
     end
   end
