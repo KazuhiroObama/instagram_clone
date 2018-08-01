@@ -31,6 +31,11 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  # 投稿確認メールに画像を表示させる設定
+  config.action_controller.asset_host = 'http://localhost:3000'
+  config.action_mailer.asset_host = config.action_controller.asset_host
+  config.action_mailer.default_url_options= { host:'localhost:3000' }
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
