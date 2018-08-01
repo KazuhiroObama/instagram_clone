@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root to: 'sessions#new'
   resources :users, except: :index
-  resources :pictures
-  resources :comments
+  resources :pictures, except: :index
+  resources :comments, only: [:create, :update, :destroy]
   get '/picture/favorites/:id', to: 'pictures#favorite', as: 'picture_favorites'
 
   resources :sessions, only: [:new, :create, :destroy]

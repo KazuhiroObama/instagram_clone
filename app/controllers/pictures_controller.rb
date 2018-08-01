@@ -51,7 +51,7 @@ class PicturesController < ApplicationController
   def destroy
     if @picture.destroy
       flash["alert-info"] = '写真を削除しました'
-      redirect_to @user
+      redirect_to @picture.user
     else
       flash.now["alert-danger"] = '写真の削除に失敗しました'
       render :edit
