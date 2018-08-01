@@ -4,7 +4,9 @@ Instagram_clone
 ## Description
 [@now_cold](https://twitter.com/now_cold?lang=ja)が作成した画像投稿&コメントアプリです。
 DIVE INTO CODEでの課題です。
+
 今現在の力量で本家に似せる、課題の要件を満たす、見やすく使いやすいアプリを目指しました。
+
 parameterを改変して他人になりすましての投稿も出来ないように工夫しました。
 
 ## Requirement
