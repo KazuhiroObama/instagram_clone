@@ -30,8 +30,8 @@
     <% @picture.comments.each do |comment| %>
       <% if comment.content.present? %>
         <div class="icon_picture_field">
-          <%= image_tag comment.picture.user.icon, class: "comment_icon" %>
-          <%= link_to comment.picture.user do %>
+          <%= image_tag comment.user.icon, class: "comment_icon" %>
+          <%= link_to comment.user do %>
             <div class="mask">
               <div class="caption">投稿者</div>
             </div>
