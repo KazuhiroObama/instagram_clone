@@ -52,13 +52,13 @@
 
 <%= form_with(model: @comment, local: true) do |form| %>
   <%= form.text_area :content, row: 4, cols: 30 %>
-  <%= form.text_field :user_id, value: :"#{current_user.id}", type: :hidden %>
-  <%= form.text_field :picture_id, value: :"#{@picture.id}", type: :hidden %>
+  <%= form.text_field :user_id, value: current_user[:id], type: :hidden %>
+  <%= form.text_field :picture_id, value: @picture.id, type: :hidden %>
   </br>
   <% if @picture.comments.find_by(user_id: current_user.id).present? %>
     <div class="actions">
       <%= form.submit "コメント編集", class: "btn btn-success"%>
-      <%= link_to "コメント削除", comment_path(id: @comment.id, comment: { picture_id: @picture.id }), method: :delete, class: 'btn btn-danger', data: { confirm: 'コメントを削除してよろしいですか？' } %>
+      <%= link_to "コメント削除", comment_path(id: @comment.id, comment: { user_id: current_user[:id], picture_id: @picture.id }), method: :delete, class: 'btn btn-danger', data: { confirm: 'コメントを削除してよろしいですか？' } %>
     </div>
   <% else %>
       <%= form.submit "コメント投稿", class: "btn btn-success"%>
