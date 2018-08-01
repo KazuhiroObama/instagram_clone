@@ -1,10 +1,10 @@
 class CommentsController < ApplicationController
   before_action :set_picture
   before_action :set_comment, only: [:update, :destroy]
-  before_action :icon_correct_user, only: [:create, :update, :destroy]
 
   def create
     @comment = Comment.new(comment_params)
+    @comment.user_id = current_user.id
     if @comment.save
       flash["alert-success"] = 'コメントを投稿しました'
       redirect_to picture_path(@picture)
@@ -15,6 +15,7 @@ class CommentsController < ApplicationController
   end
 
   def update
+    @comment.user_id = current_user.id
     if @comment.update(comment_params)
       flash["alert-success"] = 'コメントを更新しました'
       redirect_to @picture
@@ -25,6 +26,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    @comment.user_id = current_user.id
     if @comment.destroy
       flash["alert-info"] = 'コメントを削除しました'
       redirect_to @picture

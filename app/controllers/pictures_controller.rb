@@ -1,6 +1,7 @@
 class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
-  before_action :picture_correct_user, only: [ :update, :destroy]
+  before_action :picture_correct_user, only: [:update, :destroy]
+  before_action :set_user_id, only: [:create]
 
   def index
     @pictures = Picture.all
@@ -26,6 +27,7 @@ class PicturesController < ApplicationController
   end
 
   def create
+    params[:picture][:comments_attributes]["0"][:user_id] = current_user.id
     @picture = Picture.new(picture_params)
     @picture.user_id = current_user.id
     if @picture.save
@@ -66,8 +68,10 @@ class PicturesController < ApplicationController
     def set_picture
       @picture = Picture.find(params[:id])
     end
-
     def picture_params
       params.require(:picture).permit(:image, {comments_attributes: [:content, :id, :_destroy, :user_id]})
+    end
+    def set_user_id
+      params[:picture][:comments_attributes]["0"][:user_id] = current_user.id
     end
 end
