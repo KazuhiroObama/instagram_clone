@@ -25,10 +25,10 @@ DIVE INTO CODEでの課題です。
 - いいねボタン、ユーザー間のお気に入り機能追加
 - 検索機能追加
 
-## Reflection
+## Improvements
 - 不要ファイルを把握し、必要なファイルのみpush
 - commitメッセージを適切な形式で挿入
-- validation不足
+- 写真のファイルサイズ制限などのvalidation不足
 
 ## ER Diagram
 - Comming soon
