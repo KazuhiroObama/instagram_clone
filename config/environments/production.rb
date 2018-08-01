@@ -63,9 +63,9 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # 投稿確認メールに画像を表示させる設定
-  config.action_controller.asset_host = 'http://yourhostname.com'
+  config.action_controller.asset_host = 'https://sheltered-springs-61172.herokuapp.com/'
   config.action_mailer.asset_host = config.action_controller.asset_host
-  config.action_mailer.default_url_options = { host: 'yourhostname.com' }
+  config.action_mailer.default_url_options = { host: 'sheltered-springs-61172.herokuapp.com' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
