@@ -3,7 +3,9 @@ Instagram_clone
 
 ## Description
 [@now_cold](https://twitter.com/now_cold?lang=ja)が作成した画像投稿&コメントアプリです。
-Dive into codでの課題です。今現在の力量で本家に似せる、課題の要件を満たす、見やすく使いやすいアプリを目指しました。
+DIVE INTO CODEでの課題です。
+今現在の力量で本家に似せる、課題の要件を満たす、見やすく使いやすいアプリを目指しました。
+工夫した点は、parameterを改変して他人になりすませないようにしたところ。
 
 ## Requirement
 - Ruby 2.3.0
@@ -19,9 +21,14 @@ Dive into codでの課題です。今現在の力量で本家に似せる、課�
 - 写真投稿時、メール送信機能
 
 ## Comming Soon
-- HTTPリクエストを送らずにDBからデータを取得してUIをもっと快適にしたい。
-- いいねボタン、ユーザー間のお気に入り機能
-- 検索機能
+- HTTPリクエストを送らずにDBからデータを取得してUIをもっと快適に
+- いいねボタン、ユーザー間のお気に入り機能追加
+- 検索機能追加
+
+## Improvements
+- 不要ファイルを把握し、必要なファイルのみpush
+- commitメッセージを適切な形式で挿入
+- 写真のファイルサイズ制限などのvalidation不足
 
 ## ER Diagram
 - Comming soon
