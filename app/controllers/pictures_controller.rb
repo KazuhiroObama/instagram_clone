@@ -1,7 +1,6 @@
 class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
   before_action :picture_correct_user, only: [:update, :destroy]
-  before_action :set_user_id, only: [:create]
 
   def index
     @pictures = Picture.all
@@ -15,7 +14,6 @@ class PicturesController < ApplicationController
     else
       @comment = Comment.new
     end
-
   end
 
   def new
@@ -27,9 +25,9 @@ class PicturesController < ApplicationController
   end
 
   def create
-    params[:picture][:comments_attributes]["0"][:user_id] = current_user.id
-    @picture = Picture.new(picture_params)
-    @picture.user_id = current_user.id
+    @picture = current_user.pictures.build(picture_params)
+    Comment.new.user_id = current_user.id
+
     if @picture.save
       PictureMailer.picture_mail(@picture).deliver
       flash["alert-success"] = '写真投稿完了しました'
@@ -70,8 +68,5 @@ class PicturesController < ApplicationController
     end
     def picture_params
       params.require(:picture).permit(:image, {comments_attributes: [:content, :id, :_destroy, :user_id]})
-    end
-    def set_user_id
-      params[:picture][:comments_attributes]["0"][:user_id] = current_user.id
     end
 end
