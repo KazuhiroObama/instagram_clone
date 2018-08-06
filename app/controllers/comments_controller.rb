@@ -7,10 +7,10 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
     if @comment.save
       flash["alert-success"] = 'コメントを投稿しました'
-      redirect_to picture_path(@picture)
+      redirect_to @picture
     else
       flash["alert-danger"] = 'コメントに失敗しました'
-      redirect_to picture_path(@picture)
+      redirect_to @picture
     end
   end
 
@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
       redirect_to @picture
     else
       flash.now["alert-danger"] = 'コメントの更新に失敗しました'
-      render picture_path(@picture)
+      redirect_to @picture
     end
   end
 
