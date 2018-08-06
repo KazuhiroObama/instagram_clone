@@ -1,4 +1,4 @@
-<%= render 'header' %>
+<%= render 'layouts/header' %>
 
 <% flash.each do |key, value| %>
   <%= content_tag(:div, value, class: "alert #{key}") %>
@@ -44,20 +44,20 @@
   </div>
 
 
-<% if @picture.comments.find_by(user_id: current_user.id).present? %>
+<% if @comment.id.present? %>
   <h3>コメント編集</h3>
 <% else %>
   <h3>コメント投稿</h3>
 <% end %>
 
-<%= form_with(model: @comment, local: true) do |form| %>
+
+<%= form_with(model: [@picture, @comment], local: true) do |form| %>
   <%= form.text_area :content, row: 4, cols: 30 %>
-  <%= form.text_field :picture_id, value: @picture.id, type: :hidden %>
   </br>
-  <% if @picture.comments.find_by(user_id: current_user.id).present? %>
+  <% if @comment.id.present? %>
     <div class="actions">
       <%= form.submit "コメント編集", class: "btn btn-success"%>
-      <%= link_to "コメント削除", comment_path(id: @comment.id, comment: { picture_id: @picture.id }), method: :delete, class: 'btn btn-danger', data: { confirm: 'コメントを削除してよろしいですか？' } %>
+      <%= link_to "コメント削除", [@picture,@comment], method: :delete, class: 'btn btn-danger', data: { confirm: 'コメントを削除してよろしいですか？' } %>
     </div>
   <% else %>
       <%= form.submit "コメント投稿", class: "btn btn-success"%>
