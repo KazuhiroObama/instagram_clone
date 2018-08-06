@@ -3,14 +3,14 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:update, :destroy]
 
   def create
-    @comment = Comment.new(comment_params)
+    @comment = @picture.comments.build(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
       flash["alert-success"] = 'コメントを投稿しました'
       redirect_to picture_path(@picture)
     else
       flash["alert-danger"] = 'コメントに失敗しました'
-      render picture_path(@picture)
+      redirect_to picture_path(@picture)
     end
   end
 
@@ -38,11 +38,11 @@ class CommentsController < ApplicationController
 
   private
   def comment_params
-    params.require(:comment).permit(:content, :user_id, :picture_id)
+    params.require(:comment).permit(:content, :user_id)
   end
 
   def set_picture
-    @picture = Picture.find(params[:comment][:picture_id])
+    @picture = Picture.find(params[:picture_id])
   end
 
   def set_comment
