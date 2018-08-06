@@ -8,12 +8,9 @@ class PicturesController < ApplicationController
 
   def show
     @favorite = current_user.favorites.find_by(picture_id: @picture.id)
+
     comment = @picture.comments.find_by(user_id: current_user.id)
-    if comment.present?
-      @comment = comment
-    else
-      @comment = Comment.new
-    end
+    @comment = comment ? comment : Comment.new
   end
 
   def new
@@ -58,7 +55,7 @@ class PicturesController < ApplicationController
     end
   end
 
-  def favorite
+  def favorites
     @pictures = current_user.favorite_pictures
   end
 
