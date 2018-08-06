@@ -58,6 +58,7 @@ class UsersController < ApplicationController
 
   private
     def set_user
+      # rootメソッド使用時、current_user.idを使用
       @user = User.find_by(id: params[:id]) || User.find_by(id: current_user.id)
     end
 
