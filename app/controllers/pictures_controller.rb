@@ -63,6 +63,7 @@ class PicturesController < ApplicationController
     def set_picture
       @picture = Picture.find(params[:id])
     end
+    
     def picture_params
       params.require(:picture).permit(:image, {comments_attributes: [:content, :id, :_destroy, :user_id]})
     end
