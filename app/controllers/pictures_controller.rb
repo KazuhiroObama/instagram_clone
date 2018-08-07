@@ -23,7 +23,7 @@ class PicturesController < ApplicationController
 
   def create
     @picture = current_user.pictures.build(picture_params)
-    Comment.new.user_id = current_user.id
+    @picture.comments.first.user_id = current_user.id
 
     if @picture.save
       PictureMailer.picture_mail(@picture).deliver
@@ -63,7 +63,7 @@ class PicturesController < ApplicationController
     def set_picture
       @picture = Picture.find(params[:id])
     end
-    
+
     def picture_params
       params.require(:picture).permit(:image, {comments_attributes: [:content, :id, :_destroy, :user_id]})
     end
