@@ -12,11 +12,4 @@ module ApplicationHelper
       redirect_to @user
     end
   end
-  
-  def icon_correct_user
-    if comment_params[:user_id] != current_user.id.to_s
-      flash["alert-danger"] = "どうして他人のフリしてコメントするの？"
-      redirect_to @picture
-    end
-  end
 end
