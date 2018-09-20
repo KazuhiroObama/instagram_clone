@@ -6,6 +6,8 @@ Instagram_clone
 DIVE INTO CODEでの課題です。
 今現在の力量で本家に似せる、課題の要件を満たす、見やすく使いやすいアプリを目指しました。
 工夫した点は、parameterを改変して他人になりすませないようにしたところ。
+デプロイ先は以下の通りです。
+https://instagram-clone-1989.herokuapp.com/
 
 ## Requirement
 - Ruby 2.3.0
